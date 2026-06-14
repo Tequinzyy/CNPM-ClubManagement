@@ -1,0 +1,34 @@
+
+
+/* Logo spin animation */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Card styling */
+.card {
+  padding: 2em;
+}
+
+/* Documentation link styling */
+.read-the-docs {
+  color: #888;
+}
+.navbar{
+  width:100%;
+}
+.custom-navbar {
+  height: 70px
+}
