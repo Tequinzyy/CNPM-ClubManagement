@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { message, notification } from "antd";
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
 
     useEffect(() => {
-        const role = localStorage.getItem("role");
-        setIsAuthenticated(!!role);
+        // Hardcoded for static demo
+        localStorage.setItem("role", "manager");
+        setIsAuthenticated(true);
     }, []);
 
     useEffect(() => {
