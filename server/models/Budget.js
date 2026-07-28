@@ -17,7 +17,9 @@ const budgetSchema = new mongoose.Schema({
     }
 });
 
-// Thêm middleware pre-save để tự động tăng ID
+// ID tăng dần do route xử lý để tránh lệch khi update/delete bằng query.
+// NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+/*
 budgetSchema.pre('save', async function (next) {
     if (this.isNew) {
         try {
@@ -28,7 +30,6 @@ budgetSchema.pre('save', async function (next) {
             );
             this._id = counter.seq;
 
-            // Cập nhật budget của club khi thêm mới
             await mongoose.model('Club').findByIdAndUpdate(
                 this.club,
                 { $inc: { budget: this.nguonThu - this.khoanChiTieu } }
@@ -38,14 +39,13 @@ budgetSchema.pre('save', async function (next) {
         }
     }
 
-    // Cập nhật budget của club khi sửa
     if (!this.isNew && (this.isModified('nguonThu') || this.isModified('khoanChiTieu'))) {
         try {
             const original = await this.constructor.findById(this._id);
             const oldDifference = original.nguonThu - original.khoanChiTieu;
             const newDifference = this.nguonThu - this.khoanChiTieu;
             const budgetChange = newDifference - oldDifference;
-            
+
             await mongoose.model('Club').findByIdAndUpdate(
                 this.club,
                 { $inc: { budget: budgetChange } }
@@ -57,7 +57,6 @@ budgetSchema.pre('save', async function (next) {
     next();
 });
 
-// Thêm middleware cho xóa
 budgetSchema.pre('deleteOne', { document: true, query: false }, async function(next) {
     try {
         await mongoose.model('Club').findByIdAndUpdate(
@@ -69,6 +68,7 @@ budgetSchema.pre('deleteOne', { document: true, query: false }, async function(n
         next(error);
     }
 });
+*/
 
 const Budget = mongoose.model('Budget', budgetSchema);
 module.exports = Budget;

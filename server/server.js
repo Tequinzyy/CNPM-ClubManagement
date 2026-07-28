@@ -1,8 +1,14 @@
+require('dotenv').config();
+
+const buffer = require('buffer');
+
+if (!buffer.SlowBuffer) {
+    buffer.SlowBuffer = buffer.Buffer;
+}
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const multer = require('multer');
-const path = require('path');
 const clubRoutes = require('./routes/clubRoutes');
 const memberRoutes = require('./routes/memberRoutes');
 const eventRoutes = require('./routes/eventRoutes');
@@ -20,18 +26,6 @@ const app = express();
 // Middleware để parse JSON
 app.use(express.json());
 
-// Cấu hình multer để lưu trữ hình ảnh
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname)); // Thêm timestamp vào tên file
-    },
-  });
-
-  const upload = multer({ storage });
-
   app.use(cors({
     origin: '*', // Tạm thời tui cho mọi origin để Swagger hoạt động ( thật ra là phải set cụ thể nhưng mà nah )
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -46,9 +40,7 @@ const storage = multer.diskStorage({
 // Kết nối MongoDB
 const connectDB = async () => {
     try{
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
+        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/club-management', {
         });
         console.log(`MongoDB connected: ${conn.connection.host}`);
     }
@@ -73,7 +65,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: process.env.SERVER_URL,
+                url: process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5500}`,
                 description: 'Deployed server'
             },
             {
@@ -105,3 +97,5 @@ const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;

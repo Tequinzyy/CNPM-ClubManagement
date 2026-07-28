@@ -51,15 +51,17 @@ router.post('/add-budget', async (req, res) => {
 
         const savedBudget = await newBudget.save();
 
-        // Cập nhật budget của club
+        const populatedBudget = await Budget.findById(savedBudget._id)
+            .populate('club', 'ten budget');
+
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
         await Club.findByIdAndUpdate(clubDoc._id, {
-            $inc: { 
+            $inc: {
                 budget: Number(budgetData.nguonThu) - Number(budgetData.khoanChiTieu)
             }
         });
-
-        const populatedBudget = await Budget.findById(savedBudget._id)
-            .populate('club', 'ten budget');
+        */
         
         res.status(201).json(populatedBudget);
     } catch (error) {
@@ -262,6 +264,15 @@ router.delete('/delete-budget/:id/:clubId', async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy ngân sách' });
         }
 
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
+        await Club.findByIdAndUpdate(deletedBudget.club, {
+            $inc: {
+                budget: -(Number(deletedBudget.nguonThu) - Number(deletedBudget.khoanChiTieu))
+            }
+        });
+        */
+
         res.status(200).json({ message: 'Ngân sách đã bị xóa', deletedBudget });
     } catch (error) {
         console.error('Error deleting budget:', error);
@@ -424,6 +435,14 @@ router.delete('/delete-budget-allocation/:id', async (req, res) => {
         if (!deletedAllocation) {
             return res.status(404).json({ message: 'Không tìm thấy phân bổ ngân sách' });
         }
+
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
+        await Club.findByIdAndUpdate(deletedAllocation.club, {
+            $inc: { budget: -deletedAllocation.amount }
+        });
+        */
+
         res.status(200).json({ message: 'Phân bổ ngân sách đã bị xóa' });
     } catch (error) {
         res.status(500).json({ message: error.message });

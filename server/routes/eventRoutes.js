@@ -288,10 +288,12 @@ router.delete('/delete-event/:id', async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy sự kiện' });
         }
 
-        // Remove the event from the associated club
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
         await Club.findByIdAndUpdate(deletedEvent.club, {
             $pull: { suKien: deletedEvent._id }
         });
+        */
 
         res.status(200).json({ message: 'Sự kiện đã bị xóa', deletedEvent });
     } catch (error) {
@@ -375,10 +377,24 @@ router.get('/search-events/:clubId', async (req, res) => {
 router.get('/check-event-in-reports/:id', async (req, res) => {
     try {
         const eventId = req.params.id;
+        const event = await Event.findById(eventId);
+
+        if (!event) {
+            return res.status(404).json({ message: 'Không tìm thấy sự kiện' });
+        }
         
-        // Tìm sự kiện trong collection Report
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
+        // Báo cáo lưu sự kiện theo trường nhúng, không lưu ObjectId.
         const reportWithEvent = await Reports.findOne({ 
-            'danhSachSuKien': eventId 
+            'danhSachSuKien.tenSuKien': event.ten,
+            'danhSachSuKien.ngayToChuc': event.ngayToChuc
+        });
+        */
+
+        const reportWithEvent = await Reports.findOne({ 
+            'danhSachSuKien.tenSuKien': event.ten,
+            'danhSachSuKien.ngayToChuc': event.ngayToChuc
         });
 
         // Trả về true nếu sự kiện có trong báo cáo, false nếu không

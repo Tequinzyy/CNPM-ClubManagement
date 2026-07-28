@@ -1,7 +1,9 @@
-import 'dotenv/config';
-import { MongoClient, ObjectId } from 'mongodb';
+require('dotenv').config();
+
+const { MongoClient, ObjectId } = require('mongodb');
 
 const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/club-management';
+const dbName = process.env.MONGODB_DB || new URL(uri).pathname.replace(/^\//, '') || 'club-management';
 const client = new MongoClient(uri);
 
 const clubId = new ObjectId();
@@ -142,7 +144,7 @@ const counters = [
 
 async function seed() {
   await client.connect();
-  const db = client.db("club-management");
+  const db = client.db(dbName);
 
   console.log('Connected to', uri);
 

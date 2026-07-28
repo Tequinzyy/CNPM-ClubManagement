@@ -386,10 +386,24 @@ router.get('/search-prizes/:clubId', async (req, res) => {
 router.get('/check-prize-in-reports/:id', async (req, res) => {
     try {
         const prizeId = req.params.id;
+        const prize = await Prize.findById(prizeId);
+
+        if (!prize) {
+            return res.status(404).json({ message: 'Không tìm thấy giải thưởng' });
+        }
         
-        // Tìm giải thưởng trong collection Report
+        // NOTE: Commented out by AI according to request to preserve DB-migration reference logic.
+        /*
+        // Báo cáo lưu giải thưởng theo trường nhúng, không lưu ObjectId.
         const reportWithPrize = await Report.findOne({ 
-            'danhSachGiaiThuong': prizeId 
+            'danhSachGiai.tenGiai': prize.tenGiaiThuong,
+            'danhSachGiai.ngayNhanGiai': prize.ngayDatGiai
+        });
+        */
+
+        const reportWithPrize = await Report.findOne({ 
+            'danhSachGiai.tenGiai': prize.tenGiaiThuong,
+            'danhSachGiai.ngayNhanGiai': prize.ngayDatGiai
         });
 
         // Trả về true nếu giải thưởng có trong báo cáo, false nếu không
