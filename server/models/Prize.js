@@ -7,7 +7,7 @@ const prizeSchema = new mongoose.Schema({
     tenGiaiThuong: { type: String, required: true },
     ngayDatGiai: { type: Date, required: true },
     loaiGiai: { type: String, required: true },
-    thanhVienDatGiai: { 
+    thanhVienDatGiai: {
         type: mongoose.Schema.Types.Mixed,
         ref: 'Member'
     },
