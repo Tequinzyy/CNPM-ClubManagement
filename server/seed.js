@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { MongoClient, ObjectId } from 'mongodb';
 
-const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/club-management';
+const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/club-management';
 const client = new MongoClient(uri);
 
 const clubId = new ObjectId();
@@ -142,7 +142,7 @@ const counters = [
 
 async function seed() {
   await client.connect();
-  const db = client.db();
+  const db = client.db("club-management");
 
   console.log('Connected to', uri);
 
