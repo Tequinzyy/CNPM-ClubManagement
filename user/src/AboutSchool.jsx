@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import achievement1 from '/public/imgs/achivement1.jpg';
-import achievement2 from '/public/imgs/achivement2.jpg';
-import achievement3 from '/public/imgs/achivement3.jpg';
-import achievement4 from '/public/imgs/achivement4.jpg';
+import achievement1 from '/imgs/achivement1.jpg';
+import achievement2 from '/imgs/achivement2.jpg';
+import achievement3 from '/imgs/achivement3.jpg';
+import achievement4 from '/imgs/achivement4.jpg';
 
 // Thêm ScrollReveal component
 const ScrollReveal = ({ children, delay = 0 }) => {
@@ -46,7 +46,7 @@ const AboutSchool = () => {
           {/* Background image for all devices */}
           <div
             className="relative bg-cover bg-center h-[200px] sm:h-[300px] md:h-[25rem] w-full"
-            style={{backgroundImage: "url('/public/imgs/310241947-586932963121590-3034296582378048999-n-16802426955401349567464.jpg')"}}
+            style={{backgroundImage: "url('/imgs/310241947-586932963121590-3034296582378048999-n-16802426955401349567464.jpg')"}}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-70"></div>
 
@@ -107,7 +107,7 @@ const AboutSchool = () => {
               </div>
               <div className="lg:w-1/2 mt-6 lg:mt-0 lg:-ml-24 z-10">
                 <img
-                  src="/public/imgs/ay8a6925.jpg"
+                  src="/imgs/ay8a6925.jpg"
                   alt="Hoạt động ngoại khoá"
                   className="w-full h-auto object-cover rounded-lg border-4 border-white shadow-lg"
                 />
@@ -135,12 +135,12 @@ const AboutSchool = () => {
               </div>
               <div className="lg:w-1/2 mt-6 lg:mt-0 lg:-mr-24 z-10 space-y-4">
                 <img
-                  src="/public/imgs/csvc1.jpg"
+                  src="/imgs/csvc1.jpg"
                   alt="Cơ sở vật chất 1"
                   className="w-full h-auto object-cover rounded-lg border-4 border-white shadow-lg"
                 />
                 <img
-                  src="/public/imgs/csvc2.jpg"
+                  src="/imgs/csvc2.jpg"
                   alt="Cơ sở vật chất 2"
                   className="w-full h-auto object-cover rounded-lg border-4 border-white shadow-lg"
                 />
@@ -215,7 +215,7 @@ const AboutSchool = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Leadership Member 1 */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="/public/imgs/HieuTruong.jpg" alt="Thầy Nguyễn Văn A" className="w-full h-48 object-cover" />
+                <img src="/imgs/HieuTruong.jpg" alt="Thầy Nguyễn Văn A" className="w-full h-48 object-cover" />
                 <div className="p-4">
                   <h3 className="text-xl font-semibold text-gray-800">Thầy Nguyễn Văn A</h3>
                   <p className="text-gray-600">Thạc sĩ môn toán</p>
@@ -226,7 +226,7 @@ const AboutSchool = () => {
 
               {/* Leadership Member 2 */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="/public/imgs/HieuPho2.jpg" alt="Cô Trần Thị V" className="w-full h-48 object-cover" />
+                <img src="/imgs/HieuPho2.jpg" alt="Cô Trần Thị V" className="w-full h-48 object-cover" />
                 <div className="p-4">
                   <h3 className="text-xl font-semibold text-gray-800">Cô Trần Thị V</h3>
                   <p className="text-gray-600">Thạc sĩ văn học</p>
@@ -237,7 +237,7 @@ const AboutSchool = () => {
 
               {/* Leadership Member 3 */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="/public/imgs/HieuPho1.jpg" alt="Cô Nguyễn Thị T" className="w-full h-48 object-cover" />
+                <img src="/imgs/HieuPho1.jpg" alt="Cô Nguyễn Thị T" className="w-full h-48 object-cover" />
                 <div className="p-4">
                   <h3 className="text-xl font-semibold text-gray-800">Thầy Nguyễn Văn B</h3>
                   <p className="text-gray-600">Tiến sĩ Ngoại Ngữ</p>

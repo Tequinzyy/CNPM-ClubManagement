@@ -1,6 +1,6 @@
-import admissionstandard1 from "../public/imgs/admissionstandard1.jpg";
-import admissionstandard2 from "../public/imgs/admissionstandard2.jpg";
-import admissionstandard3 from "../public/imgs/admissionstandard3.jpg";
+import admissionstandard1 from "/imgs/admissionstandard1.jpg";
+import admissionstandard2 from "/imgs/admissionstandard2.jpg";
+import admissionstandard3 from "/imgs/admissionstandard3.jpg";
 
 const AdmissionStandard = () => {
     return (

@@ -98,49 +98,49 @@ const Homepage = () => {
   const newsItems = [
     {
       title: "Học sinh hào hứng trải nghiệm sự 'thay da đổi thịt' của trường",
-      image: "../public/imgs/news1.jpg",
+      image: "/imgs/news1.jpg",
       date: "3/10/2024",
       description: "Chiều ngày 3/10/2024 tại Đà Nẵng, Trung tâm ngoại ngữ Đại học RMIT tại Đà Nẵng đã tổ chức lễ ra mắt chương trình Luyện thi IELTS mới,...",
     },
     {
       title: "Nhiều trường và phụ huynh ủng hộ đi học lại sau Tết",
-      image: "../public/imgs/news2.jpg",
+      image: "/imgs/news2.jpg",
       date: "3/10/2024",
       description: "Khi nhóm chat của phụ huynh xuất hiện câu hỏi \"Nếu trường mở cửa sau Tết, có cho con đi học không?\", chị Diệu Linh, 42 tuổi, nhanh chóng chn \"Có\".",
     },
     {
       title: "Tích hợp tiếng Anh giúp người học gặt hái thành công",
-      image: "../public/imgs/news3.jpg",
+      image: "/imgs/news3.jpg",
       date: "3/10/2024",
       description: "Chủ trương đưa tiếng Anh ngôn ngữ thứ hai gần đây là một bước tiến lớn nhằm tiếp tục giúp người học thành công trong cuộc sống và công việc.",
     },
     {
       title: "Hồi sinh di sản văn hóa với công nghệ 3D tiên tiến",
-      image: "../public/imgs/news4.jpg",
+      image: "/imgs/news4.jpg",
       date: "7/10/2024",
       description: "Adobe tổ chức tập huấn cho các bảo tàng và trung tâm lưu trữ trong nước nhằm tìm hiểu về vai trò của công nghệ 3D bảo tồn văn hóa di sản bản địa.",
     },
     {
       title: "Đưa bền vững vào giảng dạy truyền thông và thiết kế",
-      image: "../public/imgs/news5.jpg",
+      image: "/imgs/news5.jpg",
       date: "5/10/2024",
       description: "Phù hợp với các Mục tiêu phát triển bền vững và 95,7% trong số đó được tích hợp tính bền vững vào tài liệu giảng dạy và học tập.",
     },
     {
       title: "Chương trình học bổng giúp học sinh khó khăn",
-      image: "../public/imgs/news6.jpg",
+      image: "/imgs/news6.jpg",
       date: "12/10/2024",
       description: "Trường phát động chương trình học bổng cho học sinh có hoàn cảnh khó khăn, nhằm hỗ trợ những em có thành tích học tập tốt nhưng gặp khó khăn về tài chính, giúp các em có cơ hội tiếp cận giáo dục chất lượng hơn.",
     },
     {
       title: "Cuộc thi sáng tạo khoa học kỹ thuật năm 2024",
-      image: "../public/imgs/news7.jpg",
+      image: "/imgs/news7.jpg",
       date: "18/10/2024",
       description: "Học sinh tham gia cuộc thi sáng tạo với nhiều dự án ấn tượng, thể hiện sự sáng tạo và kỹ năng giải quyết vấn đề. Các dự án được đánh giá cao về tính khả thi và ý nghĩa thực tiễn trong đời sống hàng ngày.",
     },
     {
       title: "Trường tổ chức lễ hội khoa học năm 2024",
-      image: "../public/imgs/news8.jpg",
+      image: "/imgs/news8.jpg",
       date: "25/10/2024",
       description: "Vào ngày 25/10/2024, trường đã tổ chức Lễ hội Khoa học, nơi học sinh có cơ hội thể hiện các dự án nghiên cứu và sáng tạo của mình. Sự kiện thu hút đông đảo học sinh, phụ huynh và giáo viên tham gia, tạo không khí hào hứng và khuyến khích học sinh khám phá đam mê khoa học và công nghệ. Nhiều dự án ấn tượng đã được trình bày, thể hiện tài năng và sự sáng tạo của các em.",
     },
@@ -179,7 +179,7 @@ const Homepage = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <img src="../public/imgs/banner.jpg" alt="Trường trung học phổ thông" className="w-full object-cover h-[300px] sm:h-[400px] md:h-[500px]"/>
+        <img src="/imgs/banner.jpg" alt="Trường trung học phổ thông" className="w-full object-cover h-[300px] sm:h-[400px] md:h-[500px]"/>
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-4 sm:p-6 border-t-4 border-black w-11/12 sm:w-5/6 md:w-4/6"
              style={{
                fontFamily: 'Roboto, sans-serif',
@@ -245,7 +245,7 @@ const Homepage = () => {
               </div>
               <div className='w-1/2 h-auto relative'>
         <img
-          src="../public/imgs/cachdaotao.jpg"
+          src="/imgs/cachdaotao.jpg"
           alt="Curriculum Infographic"
           className="absolute top-0 left-0 w-2/4 h-full object-contain"
         />              <div className="absolute top-0 left-0 w-full h-full">
@@ -309,15 +309,15 @@ const Homepage = () => {
             </h2>
             <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-4">
               <div className="flex flex-col items-center text-center max-w-xs mt-6">
-                <img src="../public/imgs/icon-achievement-1.png" alt="Global Education" className="w-20 h-auto mb-4" />
+                <img src="/imgs/icon-achievement-1.png" alt="Global Education" className="w-20 h-auto mb-4" />
                 <p className="text-sm text-gray-600">Trường học kết hợp phương pháp giảng dạy mới nhất mang lại kết quả tốt nht</p>
               </div>
               <div className="flex flex-col items-center text-center max-w-xs">
-                <img src="../public/imgs/icon-achievement-2.png" alt="30 Years Experience" className="w-20 h-25 mb-4" />
+                <img src="/imgs/icon-achievement-2.png" alt="30 Years Experience" className="w-20 h-25 mb-4" />
                 <p className="text-sm text-gray-600">Kinh nghiệm 30 năm giảng dạy chuyên ngành bằng ngoại ngữ</p>
               </div>
               <div className="flex flex-col items-center text-center max-w-xs">
-                <img src="../public/imgs/icon-achievement-3.png" alt="Education Quality" className="w-20 h-25 mb-4" />
+                <img src="/imgs/icon-achievement-3.png" alt="Education Quality" className="w-20 h-25 mb-4" />
                 <p className="text-sm text-gray-600">Đạt kiểm định chất lượng giáo dục về chương trình đào tạo và cơ sở giáo dục</p>
               </div>
             </div>
@@ -330,7 +330,7 @@ const Homepage = () => {
         {/* Background image for all devices */}
         <div
           className="relative bg-cover bg-center h-[200px] sm:h-[300px] md:h-[24rem] w-full"
-          style={{backgroundImage: "url('../public/imgs/careers.jpg')"}}
+          style={{backgroundImage: "url('/imgs/careers.jpg')"}}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-70"></div>
 

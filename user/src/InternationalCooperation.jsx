@@ -51,7 +51,7 @@ const InternationalCooperation = () => {
       title: "Trải nghiệm, lên ý tưởng và thí nghiệm mô hình nông nghiệp cùng học sinh trường Miyazaki (Nhật Bản)",
       date: "20/07/2024",
       content: "Đến với trường, các bạn học sinh Nhật Bản từ trường Miyazaki đã có cơ hội được trải nghiệm tại phòng thí nghiệm Nông nghiệp ĐHCN Quốc gia. Buổi trải nghiệm cùng thành viên CLB Khoa học (SPC) đã đem đến nhiều kiến thức bổ ích, thú vị cho các bạn học sinh Nhật Bản.",
-      imageUrl: "../public/imgs/news4.jpg"
+      imageUrl: "/imgs/news4.jpg"
     },
     {
       id: '4',

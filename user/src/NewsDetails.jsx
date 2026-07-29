@@ -5,7 +5,7 @@ const NewsDetail = () => {
   const newsItems = [
     {
       title: "Học sinh hào hứng trải nghiệm sự 'thay da đổi thịt' của trường",
-      image: "../public/imgs/news1.jpg",
+      image: "/imgs/news1.jpg",
       date: "3/10/2024",
       description: "Chiều ngày 3/10/2024 tại Thành Phố Hồ Chí Minh, Trường THPT TPHCM đã tổ chức lễ ra mắt chương trình Luyện thi IELTS mới,...",
       content: `Với sự tham gia đông đảo của học sinh và phụ huynh, buổi lễ ra mắt chương trình Luyện thi IELTS mới tại Đà Nẵng đã thành công rực rỡ. Các em học sinh có cơ hội trải nghiệm các hoạt động ngoại khóa và rèn luyện kỹ năng giao tiếp bằng tiếng Anh với những tình huống thực tế, được hướng dẫn bởi các giảng viên giàu kinh nghiệm.
@@ -18,7 +18,7 @@ const NewsDetail = () => {
     },
     {
       title: "Nhiều trường và phụ huynh ủng hộ đi học lại sau Tết",
-      image: "../public/imgs/news2.jpg",
+      image: "/imgs/news2.jpg",
       date: "3/10/2024",
       description: "Khi nhóm chat của phụ huynh xuất hiện câu hỏi \"Nếu trường mở cửa sau Tết, có cho con đi học không?\", chị Diệu Linh, 42 tuổi, nhanh chóng chọn \"Có\".",
       content: `Sau một thời gian dài học trực tuyến, nhiều phụ huynh và nhà trường tại các khu vực trong cả nước đã ủng hộ mạnh mẽ việc quay trở lại học tập trực tiếp. Theo khảo sát, hơn 90% phụ huynh cho rằng việc học trực tiếp sẽ giúp học sinh có cơ hội tương tác xã hội và tiếp thu kiến thức sâu sắc hơn.
@@ -31,7 +31,7 @@ const NewsDetail = () => {
     },
     {
       title: "Tích hợp tiếng Anh giúp người học gặt hái thành công",
-      image: "../public/imgs/news3.jpg",
+      image: "/imgs/news3.jpg",
       date: "3/10/2024",
       description: "Chủ trương đưa tiếng Anh làm ngôn ngữ thứ hai gần đây là một bước tiến lớn nhằm giúp người học thành công trong cuộc sống và công việc.",
       content: `Việc tích hợp tiếng Anh vào chương trình giảng dạy là một bước ngoặt trong việc nâng cao khả năng cạnh tranh của học sinh trên thị trường lao động quốc tế.
@@ -44,7 +44,7 @@ const NewsDetail = () => {
     },
     {
       title: "Hồi sinh di sản văn hóa với công nghệ 3D tiên tiến",
-      image: "../public/imgs/news4.jpg",
+      image: "/imgs/news4.jpg",
       date: "7/10/2024",
       description: "Adobe tổ chức tập huấn cho các bảo tàng và trung tâm lưu trữ trong nước nhằm tìm hiểu về vai trò của công nghệ 3D bảo tồn văn hóa di sản bản địa.",
       content: `Với công nghệ 3D, các chuyên gia văn hóa đang có cơ hội hồi sinh các di sản lịch sử một cách chưa từng có. Trong buổi tập huấn, đại diện từ Adobe trình bày về cách công nghệ 3D có thể tái tạo hình ảnh và lưu trữ chi tiết của các hiện vật lịch sử.
@@ -57,7 +57,7 @@ const NewsDetail = () => {
     },
     {
       title: "Đưa bền vững vào giảng dạy truyền thông và thiết kế",
-      image: "../public/imgs/news5.jpg",
+      image: "/imgs/news5.jpg",
       date: "5/10/2024",
       description: "Phù hợp với các Mục tiêu phát triển bền vững, 95,7% trong số đó đã tích hợp tính bền vững vào tài liệu giảng dạy và học tập.",
       content: `Sự kết hợp giữa truyền thông và thiết kế bền vững đã trở thành xu hướng giảng dạy mới tại các trường đại học trên toàn quốc.
@@ -70,7 +70,7 @@ const NewsDetail = () => {
     },
     {
       title: "Chương trình học bổng giúp học sinh khó khăn",
-      image: "../public/imgs/news6.jpg",
+      image: "/imgs/news6.jpg",
       date: "12/10/2024",
       description: "Trường phát động chương trình học bổng cho học sinh có hoàn cảnh khó khăn, nhằm hỗ trợ những em có thành tích học tập tốt nhưng gặp khó khăn về tài chính, giúp các em có cơ hội tiếp cận giáo dục chất lượng hơn.",
       content: `Trường trung học ABC đã khởi động chương trình học bổng dành cho học sinh có hoàn cảnh khó khăn. Chương trình này đã nhận được sự quan tâm lớn từ cộng đồng và các tổ chức xã hội.
@@ -81,7 +81,7 @@ const NewsDetail = () => {
     },
     {
       title: "Cuộc thi sáng tạo khoa học kỹ thuật năm 2024",
-      image: "../public/imgs/news7.jpg",
+      image: "/imgs/news7.jpg",
       date: "15/10/2024",
       description: "Cuộc thi sáng tạo khoa học kỹ thuật cấp quốc gia năm nay thu hút hơn 2.000 học sinh từ khắp cả nước với những dự án đầy sáng tạo và tiềm năng.",
       content: `Cuộc thi khoa học kỹ thuật cấp quốc gia đã chứng kiến sự tham gia nhiệt tình của học sinh trên toàn quốc, với hơn 200 dự án ấn tượng.
@@ -94,7 +94,7 @@ const NewsDetail = () => {
     },
     {
       title: "Sinh viên đạt thành tích cao trong cuộc thi quốc tế",
-      image: "../public/imgs/news8.jpg",
+      image: "/imgs/news8.jpg",
       date: "20/10/2024",
       description: "Nhóm sinh viên đại học X đã giành chiến thắng trong cuộc thi công nghệ quốc tế với dự án sử dụng trí tuệ nhân tạo trong y tế.",
       content: `Đội tuyển sinh viên đại học X đã ghi dấu ấn khi giành chiến thắng cuộc thi công nghệ quốc tế tổ chức tại Nhật Bản. Dự án của họ tập trung vào việc sử dụng trí tuệ nhân tạo để cải thiện hiệu quả chăm sóc sức khỏe.
