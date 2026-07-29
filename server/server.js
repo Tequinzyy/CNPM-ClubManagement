@@ -40,7 +40,7 @@ app.use(express.json());
 // Kết nối MongoDB
 const connectDB = async () => {
     try{
-        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/club-management', {
+        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/QuanLyCLB', {
         });
         console.log(`MongoDB connected: ${conn.connection.host}`);
     }
