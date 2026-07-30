@@ -34,11 +34,8 @@ export function SignIn() {
 
     const validateForm = () => {
         const newErrors = {};
-        const trimmedEmail = email.trim().toLowerCase();
         if (!email.trim()) {
-            newErrors.email = "Vui lòng nhập email";
-        } else if (!email.includes("@") || !trimmedEmail.endsWith("@thpt.edu.vn")) {
-            newErrors.email = "Email phải có định dạng @thpt.edu.vn";
+            newErrors.email = "Vui lòng nhập email hoặc ID";
         }
         if (!password) {
             newErrors.password = "Vui lòng nhập mật khẩu";
