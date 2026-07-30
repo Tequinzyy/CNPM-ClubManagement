@@ -27,6 +27,7 @@ import axios from "axios";
 import { StatisticsCard } from "@/components/StatisticsCard";
 import { Link } from "react-router-dom";
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
+import VITE_API_URL from "@/config";
 
 ChartJS.register(
     CategoryScale,
@@ -38,12 +39,9 @@ ChartJS.register(
     Legend,
 );
 
-// Thêm baseURL cho axios
-const baseURL = "http://4.242.20.80:5500"; // Port của server backend
-axios.defaults.baseURL = baseURL;
-
 // Tạo hàm format date
 const formatDate = (dateString) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
     return date.toLocaleDateString("vi-VN", {
         year: "numeric",
@@ -58,6 +56,7 @@ const cardBodyStyles = "px-2 pb-0";
 
 // Thêm hàm sắp xếp ngày
 const sortEventsByDate = (events) => {
+    if (!Array.isArray(events)) return [];
     return [...events].sort((a, b) =>
         new Date(b.ngayToChuc) - new Date(a.ngayToChuc)
     );
@@ -211,23 +210,23 @@ export function Home() {
                 const userRole = localStorage.getItem("role");
                 console.log("Current role:", userRole);
                 setRole(userRole);
-                
-                const endpoint = userRole === 'student' 
-                    ? `/api/dashboard/student/${userId}`
-                    : `/api/dashboard/teacher`;
-                
+
+                const endpoint = userRole === 'student'
+                    ? `${VITE_API_URL}/dashboard/student/${userId}`
+                    : `${VITE_API_URL}/dashboard/teacher`;
+
                 const response = await axios.get(endpoint);
                 let dashboardData = response.data;
 
                 if (userRole === 'manager') {
                     try {
                         // Fetch tất cả học sinh (accounts)
-                        const studentsResponse = await axios.get('/api/students');
-                        const totalStudents = studentsResponse.data.length;
+                        const studentsResponse = await axios.get(`${VITE_API_URL}/students`);
+                        const totalStudents = Array.isArray(studentsResponse.data) ? studentsResponse.data.length : 0;
 
                         // Fetch tất cả thành viên CLB (members)
-                        const membersResponse = await axios.get('/api/get-members');
-                        const totalMembers = membersResponse.data.length;
+                        const membersResponse = await axios.get(`${VITE_API_URL}/get-members`);
+                        const totalMembers = Array.isArray(membersResponse.data) ? membersResponse.data.length : 0;
 
                         // Tính tổng số học sinh tham gia (accounts + members)
                         const totalParticipants = totalStudents + totalMembers;
@@ -244,8 +243,8 @@ export function Home() {
                 } else if (userRole === 'student' && dashboardData.managedClubs?.length > 0) {
                     try {
                         const clubId = dashboardData.managedClubs[0]._id;
-                        const membersResponse = await axios.get(`/api/get-members-by-club/${clubId}`);
-                        const totalMembers = membersResponse.data.length;
+                        const membersResponse = await axios.get(`${VITE_API_URL}/get-members-by-club/${clubId}`);
+                        const totalMembers = Array.isArray(membersResponse.data) ? membersResponse.data.length : 0;
                         dashboardData.totalMembers = totalMembers + 1;
                     } catch (error) {
                         console.error('Error fetching club members:', error);
@@ -253,21 +252,21 @@ export function Home() {
                 }
 
                 setUserData(dashboardData);
-                
+
                 // Cập nhật các biểu đồ dựa trên role
                 if (userRole === 'student') {
                     setEventChartData(prev => ({
                         ...prev,
                         datasets: [{
                             ...prev.datasets[0],
-                            data: dashboardData.eventStats
+                            data: dashboardData.eventStats || []
                         }]
                     }));
                     setAwardsChartData((prev) => ({
                         ...prev,
                         datasets: [{
                             ...prev.datasets[0],
-                            data: dashboardData.awardStats
+                            data: dashboardData.awardStats || []
                         }]
                     }));
                 } else {
@@ -275,14 +274,14 @@ export function Home() {
                         ...prev,
                         datasets: [{
                             ...prev.datasets[0],
-                            data: dashboardData.schoolEventStats
+                            data: dashboardData.schoolEventStats || []
                         }]
                     }));
                     setSchoolAwardsData((prev) => ({
                         ...prev,
                         datasets: [{
                             ...prev.datasets[0],
-                            data: dashboardData.schoolAwardsStats
+                            data: dashboardData.schoolAwardsStats || []
                         }]
                     }));
                 }
@@ -294,40 +293,30 @@ export function Home() {
                 ) {
                     try {
                         const clubId = response.data.managedClubs[0]._id;
-                        console.log("Club ID:", clubId);
 
                         // Fetch phân bổ ngân sách
                         const allocationsResponse = await axios.get(
-                            `${baseURL}/api/budget-allocations/club/${clubId}`,
+                            `${VITE_API_URL}/budget-allocations/club/${clubId}`,
                         );
-                        console.log(
-                            "Allocations Response:",
-                            allocationsResponse.data,
-                        );
-                        const totalAllocations = allocationsResponse.data
-                            .reduce((sum, item) => sum + item.amount, 0);
-                        console.log("Total Allocations:", totalAllocations);
+                        const totalAllocations = Array.isArray(allocationsResponse.data)
+                            ? allocationsResponse.data.reduce((sum, item) => sum + (item.amount || 0), 0)
+                            : 0;
 
                         // Fetch báo cáo tài chính
                         const reportsResponse = await axios.get(
-                            `${baseURL}/api/reports/club/${clubId}`,
+                            `${VITE_API_URL}/get-reports-by-club/${clubId}`,
                         );
-                        console.log("Reports Response:", reportsResponse.data);
-                        const totalIncome = reportsResponse.data.reduce(
-                            (sum, report) => sum + (report.tongThu || 0),
-                            0,
-                        );
-                        const totalExpense = reportsResponse.data.reduce(
-                            (sum, report) =>
-                                sum + (report.tongNganSachChiTieu || 0),
-                            0,
-                        );
-                        console.log("Total Income:", totalIncome);
-                        console.log("Total Expense:", totalExpense);
-
-                        const currentBudget = totalAllocations + totalIncome -
-                            totalExpense;
-                        console.log("Current Budget:", currentBudget);
+                        const totalIncome = Array.isArray(reportsResponse.data)
+                            ? reportsResponse.data.reduce(
+                                (sum, report) => sum + (report.tongThu || 0),
+                                0,
+                            ) : 0;
+                        const totalExpense = Array.isArray(reportsResponse.data)
+                            ? reportsResponse.data.reduce(
+                                (sum, report) =>
+                                    sum + (report.tongNganSachChiTieu || 0),
+                                0,
+                            ) : 0;
 
                         setFinancialData({
                             totalAllocations,
@@ -336,10 +325,6 @@ export function Home() {
                         });
                     } catch (error) {
                         console.error("Error fetching financial data:", error);
-                        console.error("Error details:", {
-                            message: error.message,
-                            response: error.response?.data,
-                        });
                         setFinancialData({
                             totalAllocations: 0,
                             totalIncome: 0,
@@ -359,7 +344,7 @@ export function Home() {
         const fetchPendingEvents = async () => {
             try {
                 const response = await axios.get(
-                    `${baseURL}/api/get-pending-events`,
+                    `${VITE_API_URL}/get-pending-events`,
                 );
                 // Sắp xếp events trước khi set state
                 const sortedEvents = sortEventsByDate(response.data);
@@ -391,9 +376,9 @@ export function Home() {
                     if (!clubId) return;
 
                     const response = await axios.get(
-                        `${baseURL}/api/get-club-budget/${clubId}`,
+                        `${VITE_API_URL}/get-club-budget/${clubId}`,
                     );
-                    setCurrentBudget(response.data.budget);
+                    setCurrentBudget(response.data.budget || 0);
                 } catch (error) {
                     console.error("Error fetching club budget:", error);
                 }
@@ -402,7 +387,7 @@ export function Home() {
             if (userData?.managedClubs?.length > 0) {
                 fetchClubBudget();
             }
-        }, []);
+        }, [userData]);
 
         return (
             <div className="mt-12">
