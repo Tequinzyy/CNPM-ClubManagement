@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
-const API_URL = "http://4.242.20.80:5500/api";
+import API_URL from './config';
 
 const ClubDetails = () => {
   const { clubId } = useParams();

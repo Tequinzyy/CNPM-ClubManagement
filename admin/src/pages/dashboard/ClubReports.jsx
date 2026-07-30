@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import API_URL from '@/config';
 import {
     Button,
     Card,
@@ -29,7 +30,6 @@ import {
 import * as XLSX from 'xlsx';
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
 
-const API_URL = "http://4.242.20.80:5500/api";
 
 const ClubReports = () => {
     const [reports, setReports] = useState([]);

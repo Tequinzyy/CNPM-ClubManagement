@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from '@/config';
 import { FaPlus } from "react-icons/fa6";
 import {
     Button,
@@ -25,7 +26,6 @@ import {
 import { message } from "antd";
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
 
-const API_URL = "http://4.242.20.80:5500/api";
 
 const ManageClubAccountsPR = () => {
     const [accounts, setAccounts] = useState([]);

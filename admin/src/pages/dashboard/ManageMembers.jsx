@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import API_URL from '@/config';
 import {
     Button,
     Card,
@@ -29,7 +30,7 @@ import { FaPlus } from "react-icons/fa6";
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
 import { message, notification } from "antd";
 
-const API_URL = "http://4.242.20.80:5500/api";
+ 
 
 const ManageMembers = () => {
     const [members, setMembers] = useState([]);
@@ -143,9 +144,7 @@ const ManageMembers = () => {
 
     const fetchManagedClub = async (clubId) => {
         try {
-            const response = await axios.get(
-                `http://4.242.20.80:5500/api/get-club/${clubId}`,
-            );
+            const response = await axios.get(`${API_URL}/get-club/${clubId}`);
             setManagedClub(response.data);
             setNewMember((prev) => ({ ...prev, club: clubId }));
         } catch (error) {

@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from '@/config';
 import { message } from "antd";
 
 export function SignIn() {
@@ -34,7 +35,7 @@ export function SignIn() {
         setIsLoading(true);
         try {
             const response = await axios.post(
-                "http://4.242.20.80:5500/api/login",
+                `${API_URL}/login`,
                 {
                     email,
                     password,
@@ -64,7 +65,7 @@ export function SignIn() {
 
                 try {
                     const clubsResponse = await axios.get(
-                        `http://4.242.20.80:5500/api/get-managed-clubs/${userId}`,
+                        `${API_URL}/get-managed-clubs/${userId}`,
                     );
 
                     if (clubsResponse.data && clubsResponse.data.length > 0) {

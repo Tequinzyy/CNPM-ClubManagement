@@ -18,6 +18,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
+import API_URL from '@/config';
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -25,7 +26,6 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { message, notification } from "antd";
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
 
-const API_URL = "http://4.242.20.80:5500/api";
 
 // Thêm hàm validate chung
 const validateClubData = async (clubData, editingClubId) => {

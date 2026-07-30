@@ -32,7 +32,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { message, notification } from "antd";
 import { useMaterialTailwindController } from "@/context/useMaterialTailwindController";
 
-const API_URL = "http://4.242.20.80:5500/api";
+import API_URL from '@/config';
 
 const ApproveEvents = () => {
     const [events, setEvents] = useState([]);

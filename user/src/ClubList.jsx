@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
-const API_URL = "http://4.242.20.80:5500/api";
+import API_URL from './config';
 
 const requirements = [
   {

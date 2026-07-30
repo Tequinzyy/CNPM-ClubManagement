@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaGraduationCap, FaBookReader, FaBrain, FaGlobeAmericas, FaLaptop } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-
-const API_URL = "http://4.242.20.80:5500/api";
+import API_URL from './config';
 
 // Tạo một component wrapper cho animation khi scroll
 const ScrollReveal = ({ children, delay = 0 }) => {

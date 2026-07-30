@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from '@/config';
 
 export function SignUp() {
   const [userId, setUserId] = useState("");
@@ -24,7 +25,7 @@ export function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("http://4.242.20.80:5500/api/register", {
+      const response = await axios.post(`${API_URL}/register`, {
         userId,
         email,
         password,
