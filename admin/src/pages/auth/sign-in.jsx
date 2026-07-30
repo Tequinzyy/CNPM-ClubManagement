@@ -9,11 +9,13 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import API_URL from '@/config';
-import { message } from "antd";
+import { message, Alert } from "antd";
 
 export function SignIn() {
     const [email, setEmail] = useState(""); // Đổi thành email
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({});
+    const [formError, setFormError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -30,8 +32,25 @@ export function SignIn() {
         }
     }, [location]);
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!email.trim()) {
+            newErrors.email = "Vui lòng nhập email";
+        }
+        if (!password) {
+            newErrors.password = "Vui lòng nhập mật khẩu";
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setFormError("");
+        if (!validateForm()) {
+            return;
+        }
+
         setIsLoading(true);
         try {
             const response = await axios.post(
@@ -79,24 +98,22 @@ export function SignIn() {
                         );
                         navigate(redirectUrl);
                     } else {
-                        // Không quản lý CLB nào
-                        // alert(
-                        //     "Bạn đang không quản lý câu lạc bộ nào. Vui lòng liên hệ quản trị viên.",
-                        // );
-                        message.warning({content: "Bạn đang không quản lý câu lạc bộ nào. Vui lòng liên hệ quản trị viên."});
+                        const noClubMsg = "Bạn đang không quản lý câu lạc bộ nào. Vui lòng liên hệ quản trị viên.";
+                        setFormError(noClubMsg);
+                        message.warning({content: noClubMsg});
                     }
                 } catch (clubError) {
                     console.error("Error fetching managed clubs:", clubError);
-                    message.error({content: "Có lỗi xảy ra khi kiểm tra thông tin câu lạc bộ."});
-                    // alert("Có lỗi xảy ra khi kiểm tra thông tin câu lạc bộ.");
+                    const errClubMsg = "Có lỗi xảy ra khi kiểm tra thông tin câu lạc bộ.";
+                    setFormError(errClubMsg);
+                    message.error({content: errClubMsg});
                 }
             }
         } catch (error) {
             console.error("Đăng nhập thất bại:", error);
-            // alert(
-            //     "Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.",
-            // );
-            message.error({content: "Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu."});
+            const loginErrMsg = error.response?.data?.message || "Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.";
+            setFormError(loginErrMsg);
+            message.error({content: loginErrMsg});
         } finally {
             setIsLoading(false);
         }
@@ -121,44 +138,72 @@ export function SignIn() {
                     onSubmit={handleSubmit}
                     className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg"
                 >
+                    {formError && (
+                        <div className="mb-4">
+                            <Alert message={formError} type="error" showIcon />
+                        </div>
+                    )}
                     <div className="mb-1 flex flex-col gap-6">
-                        <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="-mb-3 font-medium"
-                        >
-                            Email của bạn
-                        </Typography>
-                        <Input
-                            size="lg"
-                            placeholder="ten@email.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                            labelProps={{
-                                className:
-                                    "before:content-none after:content-none",
-                            }}
-                        />
-                        <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="-mb-3 font-medium"
-                        >
-                            Mật khẩu
-                        </Typography>
-                        <Input
-                            type="password"
-                            size="lg"
-                            placeholder="********"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                            labelProps={{
-                                className:
-                                    "before:content-none after:content-none",
-                            }}
-                        />
+                        <div>
+                            <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="mb-2 font-medium"
+                            >
+                                Email của bạn
+                            </Typography>
+                            <Input
+                                size="lg"
+                                placeholder="ten@email.com"
+                                value={email}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    if (errors.email) setErrors({ ...errors, email: null });
+                                }}
+                                error={Boolean(errors.email)}
+                                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                                labelProps={{
+                                    className:
+                                        "before:content-none after:content-none",
+                                }}
+                            />
+                            {errors.email && (
+                                <Typography variant="small" color="red" className="mt-1 font-normal">
+                                    {errors.email}
+                                </Typography>
+                            )}
+                        </div>
+
+                        <div>
+                            <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="mb-2 font-medium"
+                            >
+                                Mật khẩu
+                            </Typography>
+                            <Input
+                                type="password"
+                                size="lg"
+                                placeholder="********"
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    if (errors.password) setErrors({ ...errors, password: null });
+                                }}
+                                error={Boolean(errors.password)}
+                                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                                labelProps={{
+                                    className:
+                                        "before:content-none after:content-none",
+                                }}
+                            />
+                            {errors.password && (
+                                <Typography variant="small" color="red" className="mt-1 font-normal">
+                                    {errors.password}
+                                </Typography>
+                            )}
+                        </div>
                     </div>
                     <Button
                         type="submit"
