@@ -6,11 +6,16 @@ import API_URL from "@/config";
 import { Alert } from "antd";
 
 const getRoleFromEmail = (email) => {
-  if (!email) {
+  if (!email || !email.includes("@")) {
     return null;
   }
 
-  const localPart = email.trim().split("@")[0].toLowerCase();
+  const trimmed = email.trim().toLowerCase();
+  if (!trimmed.endsWith("@thpt.edu.vn")) {
+    return null;
+  }
+
+  const localPart = trimmed.split("@")[0];
 
   if (localPart.startsWith("ps")) {
     return "manager";
@@ -44,15 +49,18 @@ export function SignUp() {
     if (!userId.trim()) {
       newErrors.userId = "Vui lòng nhập ID người dùng";
     }
+    
+    const trimmedEmail = email.trim().toLowerCase();
     if (!email.trim()) {
       newErrors.email = "Vui lòng nhập email";
+    } else if (!email.includes("@") || !trimmedEmail.endsWith("@thpt.edu.vn")) {
+      newErrors.email = "Email phải có định dạng @thpt.edu.vn";
     } else if (!role) {
-      newErrors.email = "Email phải bắt đầu bằng PS hoặc HS (ví dụ: ps123@domain.com)";
+      newErrors.email = "Email phải bắt đầu bằng PS hoặc HS và có đuôi @thpt.edu.vn";
     }
+
     if (!password) {
       newErrors.password = "Vui lòng nhập mật khẩu";
-    } else if (password.length < 6) {
-      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự";
     }
     if (!confirmPassword) {
       newErrors.confirmPassword = "Vui lòng xác nhận mật khẩu";
@@ -246,7 +254,7 @@ export function SignUp() {
                 Vai trò tự động
               </Typography>
               <div className="rounded-md border border-blue-gray-100 bg-blue-gray-50 px-3 py-2 text-sm text-blue-gray-700">
-                {role ? roleLabel : "Email phải bắt đầu bằng PS hoặc HS"}
+                {role ? roleLabel : "Email phải bắt đầu bằng PS hoặc HS và có đuôi @thpt.edu.vn"}
               </div>
             </div>
           </div>

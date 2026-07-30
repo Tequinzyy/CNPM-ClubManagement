@@ -5,11 +5,16 @@ const jwt = require("jsonwebtoken");
 const Club = require("../models/Club");
 
 const deriveRoleFromEmail = (email) => {
-    if (!email) {
+    if (!email || !email.includes("@")) {
         return null;
     }
 
-    const localPart = email.trim().split("@")[0].toLowerCase();
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed.endsWith("@thpt.edu.vn")) {
+        return null;
+    }
+
+    const localPart = trimmed.split("@")[0];
 
     if (localPart.startsWith("ps")) {
         return "manager";
@@ -26,11 +31,17 @@ const deriveRoleFromEmail = (email) => {
 router.post("/register", async (req, res) => {
     try {
         const { userId, name, email, password } = req.body;
+        if (!email || !email.includes("@") || !email.trim().toLowerCase().endsWith("@thpt.edu.vn")) {
+            return res.status(400).json({
+                message: "Email phải có định dạng @thpt.edu.vn",
+            });
+        }
+
         const role = deriveRoleFromEmail(email);
 
         if (!role) {
             return res.status(400).json({
-                message: "Email must start with PS or HS to determine role.",
+                message: "Email phải bắt đầu bằng PS hoặc HS và có đuôi @thpt.edu.vn",
             });
         }
 
